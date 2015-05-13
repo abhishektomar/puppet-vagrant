@@ -1,0 +1,9 @@
+:se laststatus=2
+:se ruler
+:se et
+:se ts=4
+:se ai
+:se hlsearch
+:se is
+:se ic
+:se bg=dark

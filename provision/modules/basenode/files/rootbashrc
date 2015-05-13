@@ -1,0 +1,9 @@
+### This file is managed by puppet SO don't make any changes..
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+EDITOR=/usr/local/bin/vim
+PS1='\[\033[1;31m\][\u@\h \W]\$\[\033[0m\] '
+alias ls='ls --color=auto'
