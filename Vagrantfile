@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
       end
       
       if node == 'puppet'
-        config.vm.synced_folder node_config['host'].to_s, node_config['guest'].to_s,
+        config.vm.synced_folder node_details['host'].to_s, node_details['guest'].to_s,
         owner: "root", group: "root"
       end
       
