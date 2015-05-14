@@ -11,11 +11,12 @@ class puppet::hiera (
     ensure => present,
     owner => root,
     group => root,
-    mode => 0644,
+    mode => "0644",
     before => Package[ 'puppetmaster' ],
     }
 
   package { "$package_name" :
-    ensure => $ensure
+    ensure   => $ensure,
+    provider => gem,
   }
 } 
