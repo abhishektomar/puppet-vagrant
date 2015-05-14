@@ -51,16 +51,5 @@ class puppet(
     ensure  => running,
     require => Package[ 'puppet' ],
   }
-  
-  # To get rid of unsupported variables and warnings
-  file { 'puppet.conf':
-    path => '/etc/puppet/puppet.conf',
-    owner => 'puppet',
-    group => 'puppet',
-    mode => 0644,
-    source => 'puppet:///modules/puppet/client-puppet.conf',
-    require => Package[ 'puppet' ],
-    notify => Service[ 'puppet' ],
-  }
 
 }
