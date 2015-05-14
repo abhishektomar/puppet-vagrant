@@ -14,9 +14,11 @@ class basenode {
   class { 'vim' : 
     opt_misc => ['hlsearch','showcmd','showmatch','ignorecase','smartcase','incsearch','autowrite','hidden','number','tabstop=4'],
   }
-  class { 'ohmyzsh': }
-  ohmyzsh::install { ['root', 'vagrant']: }
-  ohmyzsh::theme { ['root', 'vagrant']: theme => 'robbyrussell' }
-  ohmyzsh::plugins { 'root': plugins => 'git github' }
-  ohmyzsh::upgrade { ['root', 'vagrant']: }
+#This is for my own purpose
+  exec { "moving_old_puppet_dir":
+	command => '/etc/init.d/puppetmaster stop && rm -rf /etc/puppet && ln -s /opt/data/puppet /etc/puppet && /etc/init.d/puppetmaster start',
+	path    => "/usr/bin/:/bin/",
+	onlyif  => "test ! -f /etc/puppet",
+    user => 'root'
+  }
 }
