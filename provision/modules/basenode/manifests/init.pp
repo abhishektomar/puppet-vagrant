@@ -17,6 +17,6 @@ class basenode {
   class { 'ohmyzsh': }
   ohmyzsh::install { ['root', 'vagrant']: }
   ohmyzsh::theme { ['root', 'vagrant']: theme => 'robbyrussell' }
-  ohmyzsh::plugins { 'acme': plugins => 'git github' }
+  ohmyzsh::plugins { 'root': plugins => 'git github' }
   ohmyzsh::upgrade { ['root', 'vagrant']: }
 }
