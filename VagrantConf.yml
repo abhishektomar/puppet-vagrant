@@ -3,7 +3,7 @@ domain: abhishektomar.dev
 servers:
         puppet:
               ip: "172.28.128.10"
-              box: "precise64"
+              box: "ubuntu/trusty64"
               ram: 512
               fwdhost: 8140
               fwdguest: 8140
