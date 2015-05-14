@@ -36,30 +36,25 @@ class puppet::server(
   $package_name = $puppet::params::server_package_name
 ) inherits puppet::params {
 
-  include puppet::hiera
-
   # required to prevent syslog error on ubuntu
   # https://bugs.launchpad.net/ubuntu/+source/puppet/+bug/564861
-  file { '/etc/puppet' :
-    ensure => 'link',
-    target => '/opt/data/puppet',
-    force => true,
+  file { [ '/etc/puppet', '/etc/puppet/files' ]:
+    ensure => directory,
+	owner => 'puppet',
+	group => 'puppet',
+	mode => '0755',
     before => Package[ 'puppetmaster' ],
   }
-  file { [ '/etc/puppet/files', '/etc/puppet/manifests' ] :
-    ensure => directory,
-    before => Package[ 'puppetmaster' ]
-  }
+
+  include puppet::hiera
 
   package { 'puppetmaster':
     ensure => $ensure,
     name   => $package_name,
   }
 
-  package { 'puppet-lint':
-    ensure   => latest,
-    provider => gem,
-  }
+  $gempkgs=["puppet-lint", "aws-sdk-core", "retries"]
+  package {$gempkgs:  ensure => latest, provider => gem,}
 
   file { 'puppet.conf':
     path    => '/etc/puppet/puppet.conf',
