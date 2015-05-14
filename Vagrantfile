@@ -19,17 +19,18 @@ Vagrant.configure("2") do |config|
         node_config.vm.network :forwarded_port, guest: node_details['fwdguest'], host: node_details['fwdhost']
       end
 
-      memory = node_details['ram'] ? node_details['ram'] : 512;
-      puts memory
+      if node_details['ram'].to_s == '' then node_details['ram']=512 end
+      memory = node_details['ram']
       node_config.vm.provider :virtualbox do |vb|
         vb.customize [
           'modifyvm', :id,
-          '--name', node_details["node"],
-          '--memory', memory.to_s
+          '--name', node,
+          '--memory', memory.to_s,
         ]
       end
+      
       if node == 'puppet'
-        config.vm.synced_folder node_config['host'], node_config['guest'],
+        config.vm.synced_folder node_config['host'].to_s, node_config['guest'].to_s,
         owner: "root", group: "root"
       end
       
