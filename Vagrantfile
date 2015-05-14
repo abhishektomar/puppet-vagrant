@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
         ]
       end
       if node == 'puppet'
-        config.vm.synced_folder "../vms-data/", "/opt/data",
+        config.vm.synced_folder node_config['host'], node_config['guest'],
         owner: "root", group: "root"
       end
       
