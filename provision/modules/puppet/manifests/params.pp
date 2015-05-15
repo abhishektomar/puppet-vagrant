@@ -23,7 +23,7 @@ class puppet::params {
     }
     'debian': {
       $server_package_name = 'puppetmaster'
-      $server_hiera_dep = 'hash-deep-merge'
+      $server_hiera_dep = 'deep_merge'
     }
     default: {
       fail("Module 'puppet' is not currently supported by Puppet Sandbox on ${::operatingsystem}")
